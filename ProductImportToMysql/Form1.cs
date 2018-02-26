@@ -20,7 +20,7 @@ namespace ProductImportToMysql
     {
         public MySqlConnection connection;
         public string server;
-        public string database;
+        public string database; 
         public string uid;
         public string password;   
         public string port; 

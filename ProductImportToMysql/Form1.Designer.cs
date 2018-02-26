@@ -107,6 +107,7 @@
             this.comboBoxTableList.Name = "comboBoxTableList";
             this.comboBoxTableList.Size = new System.Drawing.Size(174, 21);
             this.comboBoxTableList.TabIndex = 4;
+            this.comboBoxTableList.SelectedIndexChanged += new System.EventHandler(this.comboBoxTableList_SelectedIndexChanged);
             // 
             // textBoxExcelFilePath
             // 
@@ -124,6 +125,7 @@
             this.buttonAddExcell.TabIndex = 6;
             this.buttonAddExcell.Text = "Add Excel";
             this.buttonAddExcell.UseVisualStyleBackColor = true;
+            this.buttonAddExcell.Click += new System.EventHandler(this.buttonAddExcell_Click);
             // 
             // buttonClose
             // 
@@ -137,6 +139,7 @@
             this.buttonClose.TabIndex = 7;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // Form1
             // 
@@ -148,6 +151,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductImportToMysql";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -25,7 +25,8 @@ namespace ProductImportToMysql
         public string password;   
         public string port; 
         public string tableName = string.Empty;
-
+        DateTime time = DateTime.Now;              // Use current time
+        string format = "yyyy-MM-dd HH:mm:ss";
         public Form1()
         {
             InitializeComponent();
@@ -88,7 +89,7 @@ namespace ProductImportToMysql
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    //string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+
                     string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
                        + dt.Rows[i][0].ToString() + "',"
                        + "'" + dt.Rows[i][1].ToString()  + "',"

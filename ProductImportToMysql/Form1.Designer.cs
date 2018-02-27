@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelTotalCount = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxTableList = new System.Windows.Forms.ComboBox();
-            this.textBoxExcelFilePath = new System.Windows.Forms.TextBox();
-            this.buttonAddExcell = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonAddExcell = new System.Windows.Forms.Button();
+            this.textBoxExcelFilePath = new System.Windows.Forms.TextBox();
+            this.comboBoxTableList = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelTotalCount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -60,61 +60,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
-            // dataGridView1
+            // buttonClose
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.LightBlue;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(997, 206);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(12, 225);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Total : ";
-            // 
-            // labelTotalCount
-            // 
-            this.labelTotalCount.AutoSize = true;
-            this.labelTotalCount.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelTotalCount.Location = new System.Drawing.Point(64, 225);
-            this.labelTotalCount.Name = "labelTotalCount";
-            this.labelTotalCount.Size = new System.Drawing.Size(15, 20);
-            this.labelTotalCount.TabIndex = 2;
-            this.labelTotalCount.Text = ".";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(330, 239);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Table Select";
-            // 
-            // comboBoxTableList
-            // 
-            this.comboBoxTableList.FormattingEnabled = true;
-            this.comboBoxTableList.Location = new System.Drawing.Point(431, 238);
-            this.comboBoxTableList.Name = "comboBoxTableList";
-            this.comboBoxTableList.Size = new System.Drawing.Size(174, 21);
-            this.comboBoxTableList.TabIndex = 4;
-            this.comboBoxTableList.SelectedIndexChanged += new System.EventHandler(this.comboBoxTableList_SelectedIndexChanged);
-            // 
-            // textBoxExcelFilePath
-            // 
-            this.textBoxExcelFilePath.Location = new System.Drawing.Point(220, 298);
-            this.textBoxExcelFilePath.Name = "textBoxExcelFilePath";
-            this.textBoxExcelFilePath.Size = new System.Drawing.Size(205, 20);
-            this.textBoxExcelFilePath.TabIndex = 5;
+            this.buttonClose.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClose.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonClose.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonClose.Location = new System.Drawing.Point(918, 225);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(82, 138);
+            this.buttonClose.TabIndex = 7;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonAddExcell
             // 
@@ -127,19 +85,67 @@
             this.buttonAddExcell.UseVisualStyleBackColor = true;
             this.buttonAddExcell.Click += new System.EventHandler(this.buttonAddExcell_Click);
             // 
-            // buttonClose
+            // textBoxExcelFilePath
             // 
-            this.buttonClose.BackColor = System.Drawing.Color.Salmon;
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonClose.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonClose.ForeColor = System.Drawing.Color.Firebrick;
-            this.buttonClose.Location = new System.Drawing.Point(823, 282);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(174, 75);
-            this.buttonClose.TabIndex = 7;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = false;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.textBoxExcelFilePath.Enabled = false;
+            this.textBoxExcelFilePath.Location = new System.Drawing.Point(180, 298);
+            this.textBoxExcelFilePath.Name = "textBoxExcelFilePath";
+            this.textBoxExcelFilePath.Size = new System.Drawing.Size(245, 20);
+            this.textBoxExcelFilePath.TabIndex = 5;
+            // 
+            // comboBoxTableList
+            // 
+            this.comboBoxTableList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTableList.FormattingEnabled = true;
+            this.comboBoxTableList.Location = new System.Drawing.Point(431, 238);
+            this.comboBoxTableList.Name = "comboBoxTableList";
+            this.comboBoxTableList.Size = new System.Drawing.Size(174, 21);
+            this.comboBoxTableList.TabIndex = 4;
+            this.comboBoxTableList.SelectedIndexChanged += new System.EventHandler(this.comboBoxTableList_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(330, 239);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Table Select";
+            // 
+            // labelTotalCount
+            // 
+            this.labelTotalCount.AutoSize = true;
+            this.labelTotalCount.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelTotalCount.Location = new System.Drawing.Point(64, 225);
+            this.labelTotalCount.Name = "labelTotalCount";
+            this.labelTotalCount.Size = new System.Drawing.Size(15, 20);
+            this.labelTotalCount.TabIndex = 2;
+            this.labelTotalCount.Text = ".";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(12, 225);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Total : ";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(997, 206);
+            this.dataGridView1.TabIndex = 0;
             // 
             // Form1
             // 

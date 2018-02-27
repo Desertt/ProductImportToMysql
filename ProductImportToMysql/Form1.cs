@@ -88,9 +88,25 @@ namespace ProductImportToMysql
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    string strSQL = "INSERT INTO " + tableName + "(model,quantity)" + "VALUES('"
-                       + dt.Rows[i][1].ToString() + "',"
-                       + "'" + dt.Rows[i][2].ToString() + "'"
+                    //string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+                    string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+                       + dt.Rows[i][0].ToString() + "',"
+                       + "'" + dt.Rows[i][1].ToString()  + "',"
+                       + "'" + dt.Rows[i][2].ToString()  + "',"
+                       + "'" + dt.Rows[i][3].ToString()  + "',"
+                       + "'" + dt.Rows[i][4].ToString()  + "',"
+                       + "'" + dt.Rows[i][5].ToString()  + "',"
+                       + "'" + dt.Rows[i][6].ToString()  + "',"
+                       + "'" + dt.Rows[i][7].ToString()  + "',"
+                       + "'" + dt.Rows[i][8].ToString()  + "',"
+                       + "'" + dt.Rows[i][9].ToString()  + "',"
+                       + "'" + dt.Rows[i][10].ToString() + "',"
+                       + "'" + dt.Rows[i][11].ToString() + "',"
+                       + "'" + dt.Rows[i][12].ToString() + "',"
+                       + "'" + dt.Rows[i][13].ToString() + "',"
+                       + "'" + dt.Rows[i][14].ToString() + "',"
+                       + "'" + dt.Rows[i][15].ToString() + "',"
+                       + "'" + dt.Rows[i][16].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -152,7 +168,6 @@ namespace ProductImportToMysql
             connection.Open();
             MySqlCommand cmd = new MySqlCommand(query, connection);
             MySqlDataAdapter Da = new MySqlDataAdapter(cmd);
-
             Da.Fill(Dt);
             dataGridView1.DataSource = Dt;
             labelTotalCount.Text = dataGridView1.RowCount.ToString();

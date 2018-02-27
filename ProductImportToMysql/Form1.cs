@@ -29,11 +29,11 @@ namespace ProductImportToMysql
         public Form1()
         {
             InitializeComponent();
-            server = "5.250.241.18";
-            database = "platinde_ocar405";
-            uid = "platinde";
-            password = "Platin1987";
-            port = "3308";
+            server = "1.250.240.75";
+            database = "oscar_ocar905";
+            uid = "Test";
+            password = "Test1453";
+            port = "3306";
 
             string connectionString;
             connectionString = @"SERVER=" + server + ";" + "DATABASE=" +

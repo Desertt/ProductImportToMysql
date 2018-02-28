@@ -27,7 +27,8 @@ namespace ProductImportToMysql
         public string tableName = string.Empty;
         DateTime date;  // Use date
         string strDate = "Unknown";
-        string format = "yyyy-MM-dd HH:mm:ss";
+        
+        
         public Form1()
         {
             InitializeComponent();
@@ -62,7 +63,7 @@ namespace ProductImportToMysql
             openFile.ShowDialog();
             textBoxExcelFilePath.Text = openFile.FileName;
             string filePath = textBoxExcelFilePath.Text;
-
+            strDate = date.ToString("dd/MM/yyyy");
 
 
             if (tableName == "oc5e_product")
@@ -80,35 +81,35 @@ namespace ProductImportToMysql
                     }
                 };
 
-                strDate = date.ToString("dd/MM/yyyy");
+               
                 var dataSet = excelReader.AsDataSet(result);
 
-                DataTable dt = new DataTable();
+                DataTable dtOc5eProduct = new DataTable();
 
-                dt = dataSet.Tables[0];
+                dtOc5eProduct = dataSet.Tables[0];
                 connection.Open();
 
-                for (int i = 0; i < dt.Rows.Count; i++)
+                for (int i = 0; i < dtOc5eProduct.Rows.Count; i++)
                 {
 
                     string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
-                       + dt.Rows[i][0].ToString() + "',"
-                       + "'" + dt.Rows[i][1].ToString() + "',"
-                       + "'" + dt.Rows[i][2].ToString() + "',"
-                       + "'" + dt.Rows[i][3].ToString() + "',"
-                       + "'" + dt.Rows[i][4].ToString() + "',"
-                       + "'" + dt.Rows[i][5].ToString() + "',"
-                       + "'" + dt.Rows[i][6].ToString() + "',"
-                       + "'" + dt.Rows[i][7].ToString() + "',"
-                       + "'" + dt.Rows[i][8].ToString() + "',"
-                       + "'" + dt.Rows[i][9].ToString() + "',"
-                       + "'" + dt.Rows[i][10].ToString() + "',"
-                       + "'" + dt.Rows[i][11].ToString() + "',"
-                       + "'" + dt.Rows[i][12].ToString() + "',"
-                       + "'" + dt.Rows[i][13].ToString() + "',"
-                       + "'" + dt.Rows[i][14].ToString() + "',"
-                       + "'" + dt.Rows[i][15].ToString() + "',"
-                       + "'" + dt.Rows[i][16].ToString() + "'"
+                       + dtOc5eProduct.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][1].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][2].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][3].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][4].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][5].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][6].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][7].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][8].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][9].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][10].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][11].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][12].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][13].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][14].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][15].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][16].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -123,7 +124,56 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_description")
             {
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductDescription = new DataTable();
+
+                dtOc5eProductDescription = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductDescription.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+                       + dtOc5eProductDescription.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][1].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][2].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][3].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][4].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][5].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][6].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][7].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][8].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][9].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][10].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][11].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][12].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][13].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][14].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][15].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][16].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
             }
             else if (tableName == "oc5e_product_image")
             {

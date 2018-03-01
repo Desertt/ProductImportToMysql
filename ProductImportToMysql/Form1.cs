@@ -69,6 +69,8 @@ namespace ProductImportToMysql
             if (tableName == "oc5e_product")
             {
 
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -120,6 +122,7 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+                Cursor.Current = Cursors.Default;
             }
 
             #endregion
@@ -128,6 +131,9 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_description")
             {
+
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -166,6 +172,7 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+                Cursor.Current = Cursors.Default;
             }
 
             #endregion
@@ -174,6 +181,8 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_image")
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -210,6 +219,8 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+
+                Cursor.Current = Cursors.Default;
             }
 
             #endregion
@@ -218,6 +229,8 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_special")
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -255,6 +268,7 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+                Cursor.Current = Cursors.Default;
             }
             #endregion
 
@@ -262,6 +276,9 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_to_category")
             {
+
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -297,6 +314,8 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+
+                Cursor.Current = Cursors.Default;
             }
 
             #endregion
@@ -306,6 +325,9 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_to_layout")
             {
+
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -342,6 +364,8 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+
+                Cursor.Current = Cursors.Default;
             }
 
             #endregion
@@ -350,6 +374,9 @@ namespace ProductImportToMysql
 
             else if (tableName == "oc5e_product_to_store")
             {
+
+                Cursor.Current = Cursors.WaitCursor;
+
                 FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
@@ -385,6 +412,8 @@ namespace ProductImportToMysql
                 MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
+
+                Cursor.Current = Cursors.Default;
             }
 
             #endregion
@@ -423,7 +452,6 @@ namespace ProductImportToMysql
             connection.Close();
             Cursor.Current = Cursors.Default;
         }
-
        
         private void buttonClose_Click(object sender, EventArgs e)
         {

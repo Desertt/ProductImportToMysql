@@ -23,7 +23,8 @@ namespace ProductImportToMysql
         public string database; 
         public string uid;
         public string password;   
-        public string port; 
+        public string port;
+        public string cmdValue;
         public string tableName = string.Empty;
         DateTime date;  // Use date
         string strDate = "Unknown";
@@ -37,18 +38,16 @@ namespace ProductImportToMysql
             uid = "Test";
             password = "Test1453";
             port = "3306";
+            cmdValue = "Allow Zero Datetime=true";
 
             string connectionString;
             connectionString = @"SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "PORT = " + port + ";";
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "PORT = " + port + ";" + cmdValue + ";";
 
             connection = new MySqlConnection(connectionString);
 
         }
-
-
-
-
+        
         private void buttonAddExcell_Click(object sender, EventArgs e)
         {
             if (comboBoxTableList.SelectedIndex == -1)
@@ -65,6 +64,7 @@ namespace ProductImportToMysql
             string filePath = textBoxExcelFilePath.Text;
             strDate = date.ToString("dd/MM/yyyy");
 
+            #region oc5e_product 
 
             if (tableName == "oc5e_product")
             {
@@ -81,7 +81,7 @@ namespace ProductImportToMysql
                     }
                 };
 
-               
+
                 var dataSet = excelReader.AsDataSet(result);
 
                 DataTable dtOc5eProduct = new DataTable();
@@ -122,6 +122,9 @@ namespace ProductImportToMysql
                 connection.Close();
             }
 
+            #endregion
+
+            #region oc5e_product_description
 
             else if (tableName == "oc5e_product_description")
             {
@@ -164,27 +167,230 @@ namespace ProductImportToMysql
                 textBoxExcelFilePath.Text = String.Empty;
                 connection.Close();
             }
+
+            #endregion
+
+            #region oc5e_product_image
+
             else if (tableName == "oc5e_product_image")
             {
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductImage = new DataTable();
+
+                dtOc5eProductImage = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductImage.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(product_image_id,product_id,image)" + "VALUES('"
+                       + dtOc5eProductImage.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductImage.Rows[i][1].ToString() + "',"
+                       + "'" + dtOc5eProductImage.Rows[i][2].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
             }
-            else if (tableName == "oc5e_category")
+
+            #endregion
+
+            #region oc5e_product_special
+
+            else if (tableName == "oc5e_product_special")
             {
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductSpecial = new DataTable();
+
+                dtOc5eProductSpecial = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductSpecial.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(product_special_id,product_id,customer_group_id,price)" + "VALUES('"
+                       + dtOc5eProductSpecial.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductSpecial.Rows[i][1].ToString() + "',"
+                       + "'" + dtOc5eProductSpecial.Rows[i][2].ToString() + "',"
+                       + "'" + dtOc5eProductSpecial.Rows[i][3].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
             }
+            #endregion
+
+            #region oc5e_product_to_category
+
             else if (tableName == "oc5e_product_to_category")
             {
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductToCategory = new DataTable();
+
+                dtOc5eProductToCategory = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductToCategory.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,category_id)" + "VALUES('"
+                       + dtOc5eProductToCategory.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductToCategory.Rows[i][1].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
             }
-            else if (tableName == "oc5e_category_description")
+
+            #endregion
+
+            #region oc5e_product_to_layout
+
+
+            else if (tableName == "oc5e_product_to_layout")
             {
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductToLayout = new DataTable();
+
+                dtOc5eProductToLayout = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductToLayout.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,store_id,layout_id)" + "VALUES('"
+                       + dtOc5eProductToLayout.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductToLayout.Rows[i][1].ToString() + "',"
+                       + "'" + dtOc5eProductToLayout.Rows[i][2].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
             }
-            else if (tableName == "oc5e_category_path")
+
+            #endregion
+
+            #region oc5e_product_to_store
+
+            else if (tableName == "oc5e_product_to_store")
             {
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductToStore = new DataTable();
+
+                dtOc5eProductToStore = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductToStore.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,store_id)" + "VALUES('"
+                       + dtOc5eProductToStore.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductToStore.Rows[i][1].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
             }
 
+            #endregion
+
+
+         
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -192,10 +398,11 @@ namespace ProductImportToMysql
             comboBoxTableList.Items.Add("oc5e_product");
             comboBoxTableList.Items.Add("oc5e_product_description");
             comboBoxTableList.Items.Add("oc5e_product_image");
-            comboBoxTableList.Items.Add("oc5e_category");
+            comboBoxTableList.Items.Add("oc5e_product_special");            
             comboBoxTableList.Items.Add("oc5e_product_to_category");
-            comboBoxTableList.Items.Add("oc5e_category_description");
-            comboBoxTableList.Items.Add("oc5e_category_path");
+            comboBoxTableList.Items.Add("oc5e_product_to_layout");
+            comboBoxTableList.Items.Add("oc5e_product_to_store");
+
         }
 
         private void comboBoxTableList_SelectedIndexChanged(object sender, EventArgs e)

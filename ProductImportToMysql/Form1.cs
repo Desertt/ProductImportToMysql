@@ -92,7 +92,7 @@ namespace ProductImportToMysql
                 for (int i = 0; i < dtOc5eProduct.Rows.Count; i++)
                 {
 
-                    string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
                        + dtOc5eProduct.Rows[i][0].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][1].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][2].ToString() + "',"
@@ -109,7 +109,8 @@ namespace ProductImportToMysql
                        + "'" + dtOc5eProduct.Rows[i][13].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][14].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][15].ToString() + "',"
-                       + "'" + dtOc5eProduct.Rows[i][16].ToString() + "'"
+                       + "'" + dtOc5eProduct.Rows[i][16].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][17].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -147,24 +148,12 @@ namespace ProductImportToMysql
                 for (int i = 0; i < dtOc5eProductDescription.Rows.Count; i++)
                 {
 
-                    string strSQL = "INSERT INTO " + tableName + "(model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,language_id,name,description,meta_title)" + "VALUES('"
                        + dtOc5eProductDescription.Rows[i][0].ToString() + "',"
                        + "'" + dtOc5eProductDescription.Rows[i][1].ToString() + "',"
                        + "'" + dtOc5eProductDescription.Rows[i][2].ToString() + "',"
                        + "'" + dtOc5eProductDescription.Rows[i][3].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][4].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][5].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][6].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][7].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][8].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][9].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][10].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][11].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][12].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][13].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][14].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][15].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][16].ToString() + "'"
+                       + "'" + dtOc5eProductDescription.Rows[i][4].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);

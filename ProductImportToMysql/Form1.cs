@@ -471,63 +471,9 @@ namespace ProductImportToMysql
 
         private void buttonSendBulkImage_Click(object sender, EventArgs e)
         {
-
-
-            //int fileCount = Directory.GetFiles(tempFileDirectory, "*.jpg*", SearchOption.AllDirectories).Length;
-            //foreach (var files in Directory.GetFiles(tempFileDirectory))
-            //{
-
-            //    FileInfo toUpload = new FileInfo(files);
-
-            //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host + "/" + toUpload.Name);
-
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host);
-            request.Credentials = new NetworkCredential(user, pass);
-            request.Method = WebRequestMethods.Ftp.ListDirectory;
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            StreamReader streamReader = new StreamReader(response.GetResponseStream());
-            List<string> directories = new List<string>();
-
-            string line = streamReader.ReadLine();
-            while (!string.IsNullOrEmpty(line))
-            {
-                directories.Add(line);
-                line = streamReader.ReadLine();
-            }
-            streamReader.Close();
-
-            using (WebClient ftpClient = new WebClient())
-            {
-                ftpClient.Credentials = new System.Net.NetworkCredential(user, pass);
-
-                for (int i = 0; i <= directories.Count - 1; i++)
-                {
-                    if (directories[i].Contains(".jpg"))
-                    {
-
-                        string path = host + directories[i].ToString();
-                        string trnsfrpth = tempFileDirectory + "/" + directories[i].ToString();
-                        ftpClient.UploadFile(path, trnsfrpth);
-                    }
-                }
-            }
-
-
-            //Stream ftpStream = request.GetRequestStream();
-            //FileStream file = new FileStream(tempFileDirectory, FileMode.Create);
-            //int length = 1024;
-            //byte[] buffer = new byte[length];
-            //int bytesRead = 0;
-            //do
-            //{
-            //    bytesRead = file.Read(buffer, 0, length);
-            //    ftpStream.Write(buffer, 0, bytesRead);
-            //}
-            //while (bytesRead != 0);
-            //file.Close();
-            //ftpStream.Close();
-
-
+            FtpCredentials ftpCredentialFrm = new FtpCredentials();
+            ftpCredentialFrm.Show();
+            
         }
     }
     

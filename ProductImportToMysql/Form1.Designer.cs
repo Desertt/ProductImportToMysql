@@ -38,12 +38,14 @@
             this.labelTotalCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonSendBulkImage = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonSendBulkImage);
             this.groupBox1.Controls.Add(this.buttonClose);
             this.groupBox1.Controls.Add(this.buttonAddExcell);
             this.groupBox1.Controls.Add(this.textBoxExcelFilePath);
@@ -147,6 +149,17 @@
             this.dataGridView1.Size = new System.Drawing.Size(997, 206);
             this.dataGridView1.TabIndex = 0;
             // 
+            // buttonSendBulkImage
+            // 
+            this.buttonSendBulkImage.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonSendBulkImage.Location = new System.Drawing.Point(721, 238);
+            this.buttonSendBulkImage.Name = "buttonSendBulkImage";
+            this.buttonSendBulkImage.Size = new System.Drawing.Size(142, 75);
+            this.buttonSendBulkImage.TabIndex = 8;
+            this.buttonSendBulkImage.Text = "Send Bulk Image";
+            this.buttonSendBulkImage.UseVisualStyleBackColor = true;
+            this.buttonSendBulkImage.Click += new System.EventHandler(this.buttonSendBulkImage_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,6 +189,7 @@
         private System.Windows.Forms.Label labelTotalCount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button buttonSendBulkImage;
     }
 }
 

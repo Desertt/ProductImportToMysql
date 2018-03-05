@@ -14,22 +14,33 @@ using System.Net;
 using ExcelDataReader;
 
 
-namespace ProductImportToMysql 
+namespace ProductImportToMysql
 {
     public partial class Form1 : Form
     {
         public MySqlConnection connection;
         public string server;
-        public string database; 
+        public string database;
         public string uid;
-        public string password;   
+        public string password;
         public string port;
         public string cmdValue;
         public string tableName = string.Empty;
+        public string tempFileDirectory = @"D:\ImagePool\";
+        public string host = "ftp://host.com/";
+        public string user = "Uname";
+        public string pass = "Pword";
         DateTime date;  // Use date
-        string strDate = "Unknown";
-        
-        
+
+        public string strDate = "Unknown";
+
+        public string sourcefilepath = @"D:\ImagePool\"; // e.g. "d:/test.docx"
+        public string ftpurl = "ftp://host.com/"; // e.g. ftp://serverip/foldername/foldername
+        public string ftpusername = "Uname"; // e.g. username
+        public string ftppassword = "Pword"; // e.g. password
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -47,7 +58,7 @@ namespace ProductImportToMysql
             connection = new MySqlConnection(connectionString);
 
         }
-        
+
         private void buttonAddExcell_Click(object sender, EventArgs e)
         {
             if (comboBoxTableList.SelectedIndex == -1)
@@ -419,7 +430,7 @@ namespace ProductImportToMysql
             #endregion
 
 
-         
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -427,7 +438,7 @@ namespace ProductImportToMysql
             comboBoxTableList.Items.Add("oc5e_product");
             comboBoxTableList.Items.Add("oc5e_product_description");
             comboBoxTableList.Items.Add("oc5e_product_image");
-            comboBoxTableList.Items.Add("oc5e_product_special");            
+            comboBoxTableList.Items.Add("oc5e_product_special");
             comboBoxTableList.Items.Add("oc5e_product_to_category");
             comboBoxTableList.Items.Add("oc5e_product_to_layout");
             comboBoxTableList.Items.Add("oc5e_product_to_store");
@@ -452,10 +463,73 @@ namespace ProductImportToMysql
             connection.Close();
             Cursor.Current = Cursors.Default;
         }
-       
+
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void buttonSendBulkImage_Click(object sender, EventArgs e)
+        {
+
+
+            //int fileCount = Directory.GetFiles(tempFileDirectory, "*.jpg*", SearchOption.AllDirectories).Length;
+            //foreach (var files in Directory.GetFiles(tempFileDirectory))
+            //{
+
+            //    FileInfo toUpload = new FileInfo(files);
+
+            //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host + "/" + toUpload.Name);
+
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(host);
+            request.Credentials = new NetworkCredential(user, pass);
+            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            StreamReader streamReader = new StreamReader(response.GetResponseStream());
+            List<string> directories = new List<string>();
+
+            string line = streamReader.ReadLine();
+            while (!string.IsNullOrEmpty(line))
+            {
+                directories.Add(line);
+                line = streamReader.ReadLine();
+            }
+            streamReader.Close();
+
+            using (WebClient ftpClient = new WebClient())
+            {
+                ftpClient.Credentials = new System.Net.NetworkCredential(user, pass);
+
+                for (int i = 0; i <= directories.Count - 1; i++)
+                {
+                    if (directories[i].Contains(".jpg"))
+                    {
+
+                        string path = host + directories[i].ToString();
+                        string trnsfrpth = tempFileDirectory + "/" + directories[i].ToString();
+                        ftpClient.UploadFile(path, trnsfrpth);
+                    }
+                }
+            }
+
+
+            //Stream ftpStream = request.GetRequestStream();
+            //FileStream file = new FileStream(tempFileDirectory, FileMode.Create);
+            //int length = 1024;
+            //byte[] buffer = new byte[length];
+            //int bytesRead = 0;
+            //do
+            //{
+            //    bytesRead = file.Read(buffer, 0, length);
+            //    ftpStream.Write(buffer, 0, bytesRead);
+            //}
+            //while (bytesRead != 0);
+            //file.Close();
+            //ftpStream.Close();
+
+
+        }
     }
+    
 }
+

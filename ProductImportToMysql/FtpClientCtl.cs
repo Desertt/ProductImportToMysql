@@ -464,42 +464,7 @@ namespace ProductImportToMysql
 
         #endregion
 
-        private void tsbParent_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbDownload_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbUpload_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbCreateDirectory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsbRefresh_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
-      
-
-
+        
 
         // Implements the manual sorting of items by columns.
         class ListViewItemComparer : IComparer

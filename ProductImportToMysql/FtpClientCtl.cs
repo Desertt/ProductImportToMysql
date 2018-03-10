@@ -273,13 +273,13 @@ namespace ProductImportToMysql
         #region Menu Commands
 
         // Change to parent directory
-        private void tsmiParentDirectory_Click(object sender, EventArgs e)
+        private void tsbParent_Click(object sender, EventArgs e)
         {
             SetDirectory("..");
         }
 
         // Download Files command
-        private void tsmiDownloadFiles_Click(object sender, EventArgs e)
+        private void tsbDownload_Click(object sender, EventArgs e)
         {
             List<string> files = GetSelectedFiles();
             if (files.Count > 0)
@@ -289,10 +289,16 @@ namespace ProductImportToMysql
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                     DownloadFiles(folderBrowserDialog1.SelectedPath, files.ToArray());
             }
+            if (files.Count==0)
+            {
+                MessageBox.Show(String.Format("Listeden Kayıt Seçmelisiniz  ! Seçtiğiniz Kayıt Sayısı : {0} ",files.Count));
+                return;
+            }
+
         }
 
         // Upload Files command
-        private void tsmiUploadFiles_Click(object sender, EventArgs e)
+        private void tsbUpload_Click(object sender, EventArgs e)
         {
             openFileDialog1.Title = "Upload Files";
             openFileDialog1.FileName = String.Empty;
@@ -304,7 +310,7 @@ namespace ProductImportToMysql
         }
 
         // Delete Files command
-        private void tsmiDelete_Click(object sender, EventArgs e)
+        private void tsbDelete_Click(object sender, EventArgs e)
         {
             ListView.SelectedListViewItemCollection items = listView1.SelectedItems;
             if (items.Count > 0)
@@ -332,10 +338,15 @@ namespace ProductImportToMysql
                     }
                 }
             }
+            if (items.Count==0)
+            {
+                MessageBox.Show(String.Format("Listeden Kayıt Seçmelisiniz  ! Seçtiğiniz Kayıt Sayısı : {0} ", items.Count));
+                return;
+            }
         }
 
         // Create directory
-        private void tsmiCreateDirectory_Click(object sender, EventArgs e)
+        private void tsbCreateDirectory_Click(object sender, EventArgs e)
         {
             string directory = String.Empty;
             if (InputBox.Show("Create Directory", "&New directory name:", ref directory) == DialogResult.OK)
@@ -343,7 +354,7 @@ namespace ProductImportToMysql
         }
 
         // Refresh directory
-        private void tsmiRefresh_Click(object sender, EventArgs e)
+        private void tsbRefresh_Click(object sender, EventArgs e)
         {
             Populate();
         }
@@ -541,6 +552,80 @@ namespace ProductImportToMysql
             }
         }
 
-       
+        // Change to parent directory
+        private void tsmiParentDirectory_Click(object sender, EventArgs e)
+        {
+            SetDirectory("..");
+        }
+
+        // Download Files command
+        private void tsmiDownloadFiles_Click(object sender, EventArgs e)
+        {
+            List<string> files = GetSelectedFiles();
+            if (files.Count > 0)
+            {
+                folderBrowserDialog1.Description = String.Format("Select folder to save {0} files(s). (Note that downloading directories is not currently supported.)",
+                    files.Count);
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                    DownloadFiles(folderBrowserDialog1.SelectedPath, files.ToArray());
+            }
+        }
+
+        // Upload Files command
+        private void tsmiUploadFiles_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "Upload Files";
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.Filter = "All Files|*.*|Image Files|*.jpg;*.jpeg;*.gif;*.png|Zip Files|*.zip";
+            openFileDialog1.Multiselect = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                UploadFiles(openFileDialog1.FileNames);
+        }
+
+        // Delete Files command
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedListViewItemCollection items = listView1.SelectedItems;
+            if (items.Count > 0)
+            {
+                string description;
+                if (items.Count > 1)
+                    description = String.Format("{0} items", items.Count);
+                else
+                    description = String.Format("'{0}'", ((FtpDirectoryEntry)items[0].Tag).Name);
+
+                if (MessageBox.Show(String.Format("Are you sure you want to permanently delete {0}?", description),
+                    "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    foreach (ListViewItem item in items)
+                    {
+                        FtpDirectoryEntry entry = (FtpDirectoryEntry)item.Tag;
+                        if (entry.IsDirectory)
+                        {
+                            DeleteDirectory(entry.Name);
+                        }
+                        else
+                        {
+                            DeleteFiles(entry.Name);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Create directory
+        private void tsmiCreateDirectory_Click(object sender, EventArgs e)
+        {
+            string directory = String.Empty;
+            if (InputBox.Show("Create Directory", "&New directory name:", ref directory) == DialogResult.OK)
+                CreateDirectory(directory);
+        }
+
+        // Refresh directory
+        private void tsmiRefresh_Click(object sender, EventArgs e)
+        {
+            Populate();
+        }
     }
 }

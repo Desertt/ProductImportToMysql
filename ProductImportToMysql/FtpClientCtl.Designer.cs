@@ -87,6 +87,7 @@
             this.tsbParent.Name = "tsbParent";
             this.tsbParent.Size = new System.Drawing.Size(23, 22);
             this.tsbParent.Text = "Parent Directory";
+            this.tsbParent.Click += new System.EventHandler(this.tsbParent_Click);
             // 
             // toolStripSeparator4
             // 
@@ -102,6 +103,7 @@
             this.tsbDownload.Size = new System.Drawing.Size(23, 22);
             this.tsbDownload.Text = "Download";
             this.tsbDownload.ToolTipText = "Download";
+            this.tsbDownload.Click += new System.EventHandler(this.tsbDownload_Click);
             // 
             // tsbUpload
             // 
@@ -111,6 +113,7 @@
             this.tsbUpload.Name = "tsbUpload";
             this.tsbUpload.Size = new System.Drawing.Size(23, 22);
             this.tsbUpload.Text = "Upload";
+            this.tsbUpload.Click += new System.EventHandler(this.tsbUpload_Click);
             // 
             // tsbDelete
             // 
@@ -120,6 +123,7 @@
             this.tsbDelete.Name = "tsbDelete";
             this.tsbDelete.Size = new System.Drawing.Size(23, 22);
             this.tsbDelete.Text = "Delete";
+            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
             // 
             // toolStripSeparator5
             // 
@@ -134,6 +138,7 @@
             this.tsbCreateDirectory.Name = "tsbCreateDirectory";
             this.tsbCreateDirectory.Size = new System.Drawing.Size(23, 22);
             this.tsbCreateDirectory.Text = "Create Directory";
+            this.tsbCreateDirectory.Click += new System.EventHandler(this.tsbCreateDirectory_Click);
             // 
             // toolStripSeparator6
             // 
@@ -148,6 +153,7 @@
             this.tsbRefresh.Name = "tsbRefresh";
             this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
             this.tsbRefresh.Text = "Refresh";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
             // TopToolStripPanel
             // 
@@ -212,7 +218,7 @@
             this.toolStripSeparator3,
             this.tsmiRefresh});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 154);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 176);
             // 
             // tsmiParentDirectory
             // 

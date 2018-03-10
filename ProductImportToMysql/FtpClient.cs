@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -349,7 +350,8 @@ namespace ProductImportToMysql
             text = text.Substring(8).Trim();
             string timeStr = text.Substring(0, 7);
             text = text.Substring(7).Trim();
-            entry.CreateTime = DateTime.Parse(String.Format("{0} {1}", dateStr, timeStr));
+            entry.CreateTime = DateTime.ParseExact(dateStr, "dd/MM/yyyy hh:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
+            //entry.CreateTime = DateTime.Parse(String.Format("{0} {1}", dateStr, timeStr));
             if (text.Substring(0, 5) == "<DIR>")
             {
                 entry.IsDirectory = true;
@@ -385,6 +387,7 @@ namespace ProductImportToMysql
             entry.Group = CutSubstringWithTrim(ref processstr, ' ', 0);
             CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
             entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
+            //entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
             entry.Name = processstr;   //Rest of the part is name
             return entry;
         }

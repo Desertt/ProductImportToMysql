@@ -99,7 +99,7 @@ namespace ProductImportToMysql
                     item.Text = entry.Name;
                     item.Tag = entry;
                     item.SubItems.Add((entry.IsDirectory) ? "<DIR>" : FileSizeToString(entry.Size));
-                    item.SubItems.Add(entry.CreateTime.ToString());
+             //       item.SubItems.Add(entry.CreateTime.ToString());
                     item.ImageIndex = entry.IsDirectory ? 0 : 1;
                     listView1.Items.Add(item);
                 }

@@ -43,7 +43,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ımageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiParentDirectory = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,8 +167,7 @@
             this.listView1.AllowDrop = true;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colName,
-            this.colSize,
-            this.colDate});
+            this.colSize});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -194,11 +192,6 @@
             // 
             this.colSize.Text = "Size";
             // 
-            // colDate
-            // 
-            this.colDate.Text = "Create Date";
-            this.colDate.Width = 108;
-            // 
             // ımageList1
             // 
             this.ımageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -218,7 +211,7 @@
             this.toolStripSeparator3,
             this.tsmiRefresh});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 176);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 154);
             // 
             // tsmiParentDirectory
             // 
@@ -319,7 +312,6 @@
         private System.Windows.Forms.Panel TopToolStripPanel;
         private System.Windows.Forms.ColumnHeader colName;
         private System.Windows.Forms.ColumnHeader colSize;
-        private System.Windows.Forms.ColumnHeader colDate;
         private System.Windows.Forms.ImageList ımageList1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmiParentDirectory;

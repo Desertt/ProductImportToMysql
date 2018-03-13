@@ -313,11 +313,13 @@ namespace ProductImportToMysql
                     {
                         FtpDirectoryEntry entry = parseFunction(line);
                         if (entry.Name != "." && entry.Name != "..")
+                            // var p = entry.Name.Substring(0, entry.Name.Length - 14);
+                            entry.Name = entry.Name.Substring(0, entry.Name.Length).ToString();
                             entries.Add(entry);
                     }
                 }
             }
-            return entries; ;
+            return entries; 
         }
 
         // Attempts to determine the directory format.
@@ -350,6 +352,7 @@ namespace ProductImportToMysql
             text = text.Substring(8).Trim();
             string timeStr = text.Substring(0, 7);
             text = text.Substring(7).Trim();
+
             entry.CreateTime = DateTime.ParseExact(dateStr, "dd/MM/yyyy hh:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
             //entry.CreateTime = DateTime.Parse(String.Format("{0} {1}", dateStr, timeStr));
             if (text.Substring(0, 5) == "<DIR>")
@@ -377,19 +380,57 @@ namespace ProductImportToMysql
         {
             // Assuming record style as
             // dr-xr-xr-x   1 owner    group               0 Nov 25  2002 bussys
-            FtpDirectoryEntry entry = new FtpDirectoryEntry();
-            string processstr = text.Trim();
-            entry.Flags = processstr.Substring(0, 9);
-            entry.IsDirectory = (entry.Flags[0] == 'd');
-            processstr = (processstr.Substring(11)).Trim();
-            CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
-            entry.Owner = CutSubstringWithTrim(ref processstr, ' ', 0);
-            entry.Group = CutSubstringWithTrim(ref processstr, ' ', 0);
-            CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
-            entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
+            //FtpDirectoryEntry entry = new FtpDirectoryEntry();
+            //string processstr = text.Trim();
+            ////string targetDelValue = processstr.Substring(0, processstr.Length - 14);
+            ////processstr = targetDelValue + ".";
+            //entry.Flags = processstr.Substring(0, 9);
+            //entry.IsDirectory = (entry.Flags[0] == 'd');
+            //processstr = (processstr.Substring(11)).Trim();
+            //CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
+            //entry.Owner = CutSubstringWithTrim(ref processstr, ' ', 0);
+            //entry.Group = CutSubstringWithTrim(ref processstr, ' ', 0);
+            //CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
             //entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
-            entry.Name = processstr;   //Rest of the part is name
+            //                                                //entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
+            //                                                //  entry.Name = processstr;   //Rest of the part is name
+            //entry.Name = processstr;
+            //return entry;
+
+            FtpDirectoryEntry entry = new FtpDirectoryEntry();
+
+
+            if (text != null)
+            {
+                try
+                {
+                    string processstr = text.Trim();
+                    //string targetDelValue = processstr.Substring(0, processstr.Length - 14);
+                    //processstr = targetDelValue + ".";
+                    entry.Flags = processstr.Substring(0, 9);
+                    entry.IsDirectory = (entry.Flags[0] == 'd');
+                    processstr = (processstr.Substring(11)).Trim();
+                    CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
+                    entry.Owner = CutSubstringWithTrim(ref processstr, ' ', 0);
+                    entry.Group = CutSubstringWithTrim(ref processstr, ' ', 0);
+                    CutSubstringWithTrim(ref processstr, ' ', 0);   //skip one part
+                    entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
+                    //entry.CreateTime = DateTime.Parse(CutSubstringWithTrim(ref processstr, ' ', 8));
+                    //  entry.Name = processstr;   //Rest of the part is name
+                    entry.Name = processstr;
+                }
+                catch (Exception ex)
+                {
+
+                    entry.Name = "HATALI";
+                    
+                }
+               
+            }
+
             return entry;
+
+
         }
 
         // Removes the token ending in the specified character

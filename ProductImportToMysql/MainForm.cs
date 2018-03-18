@@ -45,6 +45,7 @@ namespace ProductImportToMysql
         public MainForm()
         {
             InitializeComponent();
+
             server = "1.250.240.75";
             database = "oscar_ocar905";
             uid = "Test";

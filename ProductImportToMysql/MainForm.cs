@@ -59,6 +59,7 @@ namespace ProductImportToMysql
 
             connection = new MySqlConnection(connectionString);
 
+
         }
 
         private void buttonAddExcell_Click(object sender, EventArgs e)

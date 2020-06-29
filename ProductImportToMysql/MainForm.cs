@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ExcelDataReader;
 using MySql.Data.MySqlClient;
-using Excel = Microsoft.Office.Interop.Excel;
+using System;
+using System.Data;
 using System.IO;
-using System.Net;
-using ExcelDataReader;
+using System.Windows.Forms;
 
 
 namespace ProductImportToMysql
@@ -171,12 +163,15 @@ namespace ProductImportToMysql
                 for (int i = 0; i < dtOc5eProductDescription.Rows.Count; i++)
                 {
 
-                    string strSQL = "INSERT INTO " + tableName + "(product_id,language_id,name,description,meta_title)" + "VALUES('"
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,language_id,name,description,tag,meta_title,meta_description,meta_keyword)" + "VALUES('"
                        + dtOc5eProductDescription.Rows[i][0].ToString() + "',"
                        + "'" + dtOc5eProductDescription.Rows[i][1].ToString() + "',"
                        + "'" + dtOc5eProductDescription.Rows[i][2].ToString() + "',"
                        + "'" + dtOc5eProductDescription.Rows[i][3].ToString() + "',"
-                       + "'" + dtOc5eProductDescription.Rows[i][4].ToString() + "'"
+                       + "'" + dtOc5eProductDescription.Rows[i][4].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][5].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][6].ToString() + "',"
+                       + "'" + dtOc5eProductDescription.Rows[i][7].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -224,6 +219,53 @@ namespace ProductImportToMysql
                        + dtOc5eProductImage.Rows[i][0].ToString() + "',"
                        + "'" + dtOc5eProductImage.Rows[i][1].ToString() + "',"
                        + "'" + dtOc5eProductImage.Rows[i][2].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
+
+                Cursor.Current = Cursors.Default;
+            }
+
+            #endregion
+
+            #region oc5e_product_related
+
+            else if (tableName == "oc5e_product_related")
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eProductRelated = new DataTable();
+
+                dtOc5eProductRelated = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eProductRelated.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,related_id)" + "VALUES('"
+                       + dtOc5eProductRelated.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eProductRelated.Rows[i][1].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -441,6 +483,7 @@ namespace ProductImportToMysql
             comboBoxTableList.Items.Add("oc5e_product");
             comboBoxTableList.Items.Add("oc5e_product_description");
             comboBoxTableList.Items.Add("oc5e_product_image");
+            comboBoxTableList.Items.Add("oc5e_product_related");
             comboBoxTableList.Items.Add("oc5e_product_special");
             comboBoxTableList.Items.Add("oc5e_product_to_category");
             comboBoxTableList.Items.Add("oc5e_product_to_layout");
@@ -476,9 +519,9 @@ namespace ProductImportToMysql
         {
             FtpCredentials ftpCredentialFrm = new FtpCredentials();
             ftpCredentialFrm.Show();
-            
+
         }
     }
-    
+
 }
 

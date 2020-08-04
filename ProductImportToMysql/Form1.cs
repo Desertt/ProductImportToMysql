@@ -26,7 +26,7 @@ namespace ProductImportToMysql
 			frm.ShowDialog();
 			ftpClientCtl1.Host = Properties.Settings.Default.Host;
 			ftpClientCtl1.Username = Properties.Settings.Default.Username;
-			ftpClientCtl1.Password = Properties.Settings.Default.Password;
+			ftpClientCtl1.Password = Properties.Settings.Default.Password; 
 			ftpClientCtl1.Populate();
 		}
 	}

@@ -20,16 +20,16 @@ namespace ProductImportToMysql
         public string tableName = string.Empty;
         public string tempFileDirectory = @"D:\ImagePool\";
         public string host = "ftp://host.com/";
-        public string user = "Uname";
-        public string pass = "Pword";
+        public string user = "aa";
+        public string pass = "2020!";
         DateTime date;  // Use date
 
         public string strDate = "Unknown";
 
         public string sourcefilepath = @"D:\ImagePool\"; // e.g. "d:/test.docx"
         public string ftpurl = "ftp://host.com/"; // e.g. ftp://serverip/foldername/foldername
-        public string ftpusername = "Uname"; // e.g. username
-        public string ftppassword = "Pword"; // e.g. password
+        public string ftpusername = "aa"; // e.g. username
+        public string ftppassword = "2020!"; // e.g. password
 
 
 
@@ -38,11 +38,11 @@ namespace ProductImportToMysql
         {
             InitializeComponent();
 
-            server = "1.250.240.75";
-            database = "oscar_ocar905";
-            uid = "Test";
-            password = "Test1453";
-            port = "3306";
+            server = "10.10.10.10";
+            database = "aaa_o06";
+            uid = "aaa_oc6";
+            password = "p9A-98SL]Q";
+            port = "3300";
             cmdValue = "Allow Zero Datetime=true";
 
             string connectionString;
@@ -70,9 +70,9 @@ namespace ProductImportToMysql
             string filePath = textBoxExcelFilePath.Text;
             strDate = date.ToString("dd/MM/yyyy");
 
-            #region oc5e_product 
+            #region ocly_product 
 
-            if (tableName == "oc5e_product")
+            if (tableName == "ocly_product")
             {
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -100,7 +100,7 @@ namespace ProductImportToMysql
                 for (int i = 0; i < dtOc5eProduct.Rows.Count; i++)
                 {
 
-                    string strSQL = "INSERT INTO " + tableName + "(product_id,model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified)" + "VALUES('"
+                    string strSQL = "INSERT INTO " + tableName + "(product_id,model,quantity,stock_status_id,image,manufacturer_id,shipping,price,tax_class_id,date_available,weight_class_id,length_class_id,subtract,minimum,sort_order,status,date_added,date_modified,bulkpriceupdate)" + "VALUES('"
                        + dtOc5eProduct.Rows[i][0].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][1].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][2].ToString() + "',"
@@ -118,7 +118,8 @@ namespace ProductImportToMysql
                        + "'" + dtOc5eProduct.Rows[i][14].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][15].ToString() + "',"
                        + "'" + dtOc5eProduct.Rows[i][16].ToString() + "',"
-                       + "'" + dtOc5eProduct.Rows[i][17].ToString() + "'"
+                       + "'" + dtOc5eProduct.Rows[i][17].ToString() + "',"
+                       + "'" + dtOc5eProduct.Rows[i][18].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -133,9 +134,9 @@ namespace ProductImportToMysql
 
             #endregion
 
-            #region oc5e_product_description
+            #region ocly_product_description
 
-            else if (tableName == "oc5e_product_description")
+            else if (tableName == "ocly_product_description")
             {
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -186,9 +187,9 @@ namespace ProductImportToMysql
 
             #endregion
 
-            #region oc5e_product_image
+            #region ocly_product_image
 
-            else if (tableName == "oc5e_product_image")
+            else if (tableName == "ocly_product_image")
             {
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -234,9 +235,9 @@ namespace ProductImportToMysql
 
             #endregion
 
-            #region oc5e_product_related
+            #region ocly_product_related
 
-            else if (tableName == "oc5e_product_related")
+            else if (tableName == "ocly_product_related")
             {
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -281,9 +282,9 @@ namespace ProductImportToMysql
 
             #endregion
 
-            #region oc5e_product_special
+            #region ocly_product_special
 
-            else if (tableName == "oc5e_product_special")
+            else if (tableName == "ocly_product_special")
             {
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -310,11 +311,12 @@ namespace ProductImportToMysql
                 for (int i = 0; i < dtOc5eProductSpecial.Rows.Count; i++)
                 {
 
-                    string strSQL = "INSERT INTO " + tableName + "(product_special_id,product_id,customer_group_id,price)" + "VALUES('"
+                    string strSQL = "INSERT INTO " + tableName + "(product_special_id,product_id,customer_group_id,price,bulkpriceupdate)" + "VALUES('"
                        + dtOc5eProductSpecial.Rows[i][0].ToString() + "',"
                        + "'" + dtOc5eProductSpecial.Rows[i][1].ToString() + "',"
                        + "'" + dtOc5eProductSpecial.Rows[i][2].ToString() + "',"
-                       + "'" + dtOc5eProductSpecial.Rows[i][3].ToString() + "'"
+                       + "'" + dtOc5eProductSpecial.Rows[i][3].ToString() + "',"
+                       + "'" + dtOc5eProductSpecial.Rows[i][4].ToString() + "'"
                        + ")";
 
                     var objCmd = new MySqlCommand(strSQL, connection);
@@ -328,9 +330,9 @@ namespace ProductImportToMysql
             }
             #endregion
 
-            #region oc5e_product_to_category
+            #region ocly_product_to_category
 
-            else if (tableName == "oc5e_product_to_category")
+            else if (tableName == "ocly_product_to_category")
             {
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -376,10 +378,10 @@ namespace ProductImportToMysql
 
             #endregion
 
-            #region oc5e_product_to_layout
+            #region ocly_product_to_layout
 
 
-            else if (tableName == "oc5e_product_to_layout")
+            else if (tableName == "ocly_product_to_layout")
             {
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -426,9 +428,9 @@ namespace ProductImportToMysql
 
             #endregion
 
-            #region oc5e_product_to_store
+            #region ocly_product_to_store
 
-            else if (tableName == "oc5e_product_to_store")
+            else if (tableName == "ocly_product_to_store")
             {
 
                 Cursor.Current = Cursors.WaitCursor;
@@ -474,20 +476,69 @@ namespace ProductImportToMysql
 
             #endregion
 
+            #region ocly_seo_url
 
+            else if (tableName == "ocly_seo_url")
+            {
+
+                Cursor.Current = Cursors.WaitCursor;
+
+                FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var result = new ExcelDataReader.ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataReader.ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+
+                var dataSet = excelReader.AsDataSet(result);
+
+                DataTable dtOc5eSeoUrl = new DataTable();
+
+                dtOc5eSeoUrl = dataSet.Tables[0];
+                connection.Open();
+
+                for (int i = 0; i < dtOc5eSeoUrl.Rows.Count; i++)
+                {
+
+                    string strSQL = "INSERT INTO " + tableName + "(seo_url_id,store_id,language_id,query,keyword)" + "VALUES('"
+                       + dtOc5eSeoUrl.Rows[i][0].ToString() + "',"
+                       + "'" + dtOc5eSeoUrl.Rows[i][1].ToString() + "',"
+                       + "'" + dtOc5eSeoUrl.Rows[i][2].ToString() + "',"
+                       + "'" + dtOc5eSeoUrl.Rows[i][3].ToString() + "',"
+                       + "'" + dtOc5eSeoUrl.Rows[i][4].ToString() + "'"
+                       + ")";
+
+                    var objCmd = new MySqlCommand(strSQL, connection);
+                    var sendData = objCmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show(tableName + " Tablosuna Excel Kayıtları Eklendi !");
+                textBoxExcelFilePath.Text = String.Empty;
+                connection.Close();
+                Cursor.Current = Cursors.Default;
+            }
+
+            #endregion
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBoxTableList.Items.Add("oc5e_product");
-            comboBoxTableList.Items.Add("oc5e_product_description");
-            comboBoxTableList.Items.Add("oc5e_product_image");
-            comboBoxTableList.Items.Add("oc5e_product_related");
-            comboBoxTableList.Items.Add("oc5e_product_special");
-            comboBoxTableList.Items.Add("oc5e_product_to_category");
-            comboBoxTableList.Items.Add("oc5e_product_to_layout");
-            comboBoxTableList.Items.Add("oc5e_product_to_store");
+            comboBoxTableList.Items.Add("ocly_product");
+            comboBoxTableList.Items.Add("ocly_product_description");
+            comboBoxTableList.Items.Add("ocly_product_image");
+            comboBoxTableList.Items.Add("ocly_product_related");
+            comboBoxTableList.Items.Add("ocly_product_special");
+            comboBoxTableList.Items.Add("ocly_product_to_category");
+            comboBoxTableList.Items.Add("ocly_product_to_layout");
+            comboBoxTableList.Items.Add("ocly_product_to_store");
+            comboBoxTableList.Items.Add("ocly_seo_url");
 
         }
 
